@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { loanProviders } from './providers/loan.providers';
+import { LoanService } from './services/loan.services';
+import { LoanController } from './controllers/loan.controller';
+import { BookController } from './controllers/book.controller';
 import { bookProviders } from './providers/book.providers';
 import { BookService } from './services/book.services';
 import { BookController } from './controllers/book.controller';
@@ -12,7 +14,8 @@ import { ReviewService } from './services/review.services';
 import { reviewProviders } from './providers/review.providers';
 
 @Module({
-  imports: [DatabaseModule,
+  imports: [
+    DatabaseModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/public',
@@ -28,4 +31,4 @@ import { reviewProviders } from './providers/review.providers';
     ...reviewProviders
   ],
 })
-export class AppModule { }
+export class AppModule {}
