@@ -7,6 +7,9 @@ import { join } from 'path';
 import { bookProviders } from './providers/book.providers';
 import { BookService } from './services/book.services';
 import { BookController } from './controllers/book.controller';
+import { ReviewController } from './controllers/review.controller';
+import { ReviewService } from './services/review.services';
+import { reviewProviders } from './providers/review.providers';
 
 @Module({
   imports: [DatabaseModule,
@@ -16,10 +19,13 @@ import { BookController } from './controllers/book.controller';
     }),
   ],
   controllers: [
-    BookController],
+    BookController,
+  ReviewController],
   providers: [
     ...bookProviders,
-    BookService
+    BookService,
+    ReviewService,
+    ...reviewProviders
   ],
 })
 export class AppModule { }

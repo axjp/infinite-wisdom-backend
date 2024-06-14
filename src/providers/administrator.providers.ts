@@ -1,3 +1,4 @@
+
 import { DataSource } from 'typeorm';
 import { AdministratorEntity } from '../entities/administrator.entity'; // Ajusta la ruta si es necesario
 
