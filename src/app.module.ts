@@ -11,6 +11,10 @@ import { BookController } from './controllers/book.controller';
 import { ReviewController } from './controllers/review.controller';
 import { ReviewService } from './services/review.services';
 import { reviewProviders } from './providers/review.providers';
+import { AuthModule } from './auth/auth.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AdministratorEntity } from './entities/administrator.entity';
+import { AdministratorService } from './services/administrator.services';
 
 @Module({
   imports: [
@@ -19,18 +23,22 @@ import { reviewProviders } from './providers/review.providers';
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/public',
     }),
+    AuthModule,
+    TypeOrmModule.forFeature([AdministratorEntity]), // Importamos la entidad de administrador
   ],
   controllers: [
     BookController,
-  ReviewController,
-  LoanController],
+    ReviewController,
+    LoanController
+  ],
   providers: [
     ...bookProviders,
     ...reviewProviders,
     ...loanProviders,
     BookService,
     ReviewService,
-    LoanService
+    LoanService,
+    AdministratorService, // Añadimos el servicio de administradores aquí
   ],
 })
 export class AppModule {}

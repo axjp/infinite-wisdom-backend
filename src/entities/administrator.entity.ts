@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { LoginEntity } from './login.entity';
 

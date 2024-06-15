@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany } from 'typeorm';
 import { CategoryEntity } from './category.entity';
 import { ReviewEntity } from './review.entity';
