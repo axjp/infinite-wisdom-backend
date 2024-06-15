@@ -7,19 +7,28 @@ import { join } from 'path';
 import { bookProviders } from './providers/book.providers';
 import { BookService } from './services/book.services';
 import { BookController } from './controllers/book.controller';
+import { AdministratorController } from './controllers/administrator.controller';
+import { AdministratorServices } from './services/administrator.services';
+import { administratorProviders } from './providers/administrator.providers';
 
 @Module({
-  imports: [DatabaseModule,
+  imports: [
+    DatabaseModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/public',
     }),
   ],
   controllers: [
-    BookController],
+    BookController,
+    AdministratorController,
+  ],
   providers: [
     ...bookProviders,
-    BookService
+    ...administratorProviders,
+    BookService,
+    AdministratorServices
+
   ],
 })
 export class AppModule { }
