@@ -9,11 +9,11 @@ export const databaseProviders = [
         host: 'localhost',
         port: 5432,
         username: 'postgres',
-        password: 'theincrediblehulk',
-        database: 'proyecto',
+        password: '159817',
+        database: 'test',
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: true,
-        dropSchema: false,
+        dropSchema: true,
       });
 
       return dataSource.initialize();

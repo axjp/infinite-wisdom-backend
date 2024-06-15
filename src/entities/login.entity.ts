@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, JoinColumn } from 'typeorm';
 import { RolEntity } from './rol.entity';
 import { AdministratorEntity } from './administrator.entity';
