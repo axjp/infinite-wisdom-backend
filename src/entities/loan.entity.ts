@@ -8,11 +8,11 @@ export class LoanEntity {
   idloan: string;
 
   @ManyToOne(() => CustomerEntity)
-  @JoinColumn({name:'customer_id'})
+  @JoinColumn({ name: 'customer_id' })
   customer: CustomerEntity;
 
   @ManyToOne(() => BookEntity)
-  @JoinColumn({name:'book_id'})
+  @JoinColumn({ name: 'book_id' })
   book: BookEntity;
 
   @Column({ type: 'date', name: 'loan_date', comment: 'Loan date' })

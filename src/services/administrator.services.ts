@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+/*
+>>>>>>> cfa4f08a45f4bc7d24d4e1f4e38fa4d5809141d5
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { AdministratorEntity } from '../entities/administrator.entity';
@@ -52,13 +56,26 @@ export class AdministratorServices {
     return await this.administratorRepository.save(administrator);
   }
 
+<<<<<<< HEAD
   async softDelete(idAdministrator: string) {
     const deleteResult = await this.administratorRepository.softDelete(idAdministrator);
+=======
+  async delete(idAdministrator: string) {
+    const deleteResult = await this.administratorRepository.delete(idAdministrator);
+>>>>>>> cfa4f08a45f4bc7d24d4e1f4e38fa4d5809141d5
 
     if (deleteResult.affected === 0) {
       throw new NotFoundException(`Administrator with ID ${idAdministrator} not found`);
     }
+<<<<<<< HEAD
     await this.administratorRepository.softDelete(idAdministrator);
     return deleteResult;
   }
 }
+=======
+
+    return deleteResult;
+  }
+}
+*/
+>>>>>>> cfa4f08a45f4bc7d24d4e1f4e38fa4d5809141d5

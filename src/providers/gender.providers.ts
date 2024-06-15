@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { DataSource } from 'typeorm';
 import { GenderEntity } from 'src/entities/gender.entity';
 

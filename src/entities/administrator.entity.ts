@@ -25,7 +25,7 @@ export class AdministratorEntity {
   @Column({ 
     type: 'varchar', 
     length: 20, 
-    name: 'lastName',
+    name: 'lastName', 
     comment: 'Last name of the administrator' 
   })
   lastName: string;
@@ -56,7 +56,7 @@ export class AdministratorEntity {
 
   @Column({ 
     type: 'date', 
-    name: 'birthdate',
+    name: 'birthday', 
     comment: 'Birthday of the administrator'
    })
    birthdate: Date;
