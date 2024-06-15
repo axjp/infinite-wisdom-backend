@@ -1,3 +1,4 @@
+/*
 import {
   Body,
   Controller,
@@ -40,3 +41,4 @@ export class AdministratorController {
     return await this.administratorServices.delete(id);
   }
 }
+*/

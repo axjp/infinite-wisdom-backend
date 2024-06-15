@@ -1,3 +1,4 @@
+/*
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { AdministratorEntity } from '../entities/administrator.entity';
@@ -62,3 +63,4 @@ export class AdministratorServices {
     return deleteResult;
   }
 }
+*/

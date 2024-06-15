@@ -8,19 +8,13 @@ import { LoanController } from './controllers/loan.controller';
 import { bookProviders } from './providers/book.providers';
 import { BookService } from './services/book.services';
 import { BookController } from './controllers/book.controller';
-<<<<<<< HEAD
-import { AdministratorController } from './controllers/administrator.controller';
-import { AdministratorServices } from './services/administrator.services';
-import { administratorProviders } from './providers/administrator.providers';
-=======
 import { ReviewController } from './controllers/review.controller';
 import { ReviewService } from './services/review.services';
 import { reviewProviders } from './providers/review.providers';
-import { AuthModule } from './auth/auth.module';
+//import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AdministratorEntity } from './entities/administrator.entity';
-import { AdministratorService } from './services/administrator.services';
->>>>>>> 8cfe29a2ea43d9ad574edd2d87dfddf1f3a776a9
+//import { AdministratorEntity } from './entities/administrator.entity';
+//import { AdministratorService } from './services/administrator.services';
 
 @Module({
   imports: [
@@ -29,21 +23,11 @@ import { AdministratorService } from './services/administrator.services';
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/public',
     }),
-    AuthModule,
-    TypeOrmModule.forFeature([AdministratorEntity]), // Importamos la entidad de administrador
+    //AuthModule,
+    TypeOrmModule.forFeature(),
   ],
   controllers: [
     BookController,
-<<<<<<< HEAD
-    AdministratorController,
-  ],
-  providers: [
-    ...bookProviders,
-    ...administratorProviders,
-    BookService,
-    AdministratorServices
-
-=======
     ReviewController,
     LoanController
   ],
@@ -54,8 +38,7 @@ import { AdministratorService } from './services/administrator.services';
     BookService,
     ReviewService,
     LoanService,
-    AdministratorService, // Añadimos el servicio de administradores aquí
->>>>>>> 8cfe29a2ea43d9ad574edd2d87dfddf1f3a776a9
+    //AdministratorService, // Añadimos el servicio de administradores aquí
   ],
 })
 export class AppModule {}
