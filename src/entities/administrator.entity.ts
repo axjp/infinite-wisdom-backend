@@ -1,9 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { 
+  Entity, 
+  PrimaryGeneratedColumn, 
+  Column, 
+  ManyToOne, 
+  JoinColumn, 
+  DeleteDateColumn
+} 
+from 'typeorm';
 import { LoginEntity } from './login.entity';
 
 @Entity('administrators')
 export class AdministratorEntity {
-  @PrimaryGeneratedColumn('uuid', { name: 'id_administrator' })
+  @PrimaryGeneratedColumn('uuid', {})
   idAdministrator: string;
 
   @Column({ 
@@ -17,7 +25,7 @@ export class AdministratorEntity {
   @Column({ 
     type: 'varchar', 
     length: 20, 
-    name: 'last_name', 
+    name: 'lastName',
     comment: 'Last name of the administrator' 
   })
   lastName: string;
@@ -25,7 +33,7 @@ export class AdministratorEntity {
   @Column({ 
     type: 'varchar', 
     length: 50, 
-    name: 'email', 
+    name: 'email',
     comment: 'Email of the administrator' 
   })
   email: string;
@@ -33,7 +41,7 @@ export class AdministratorEntity {
   @Column({ 
     type: 'varchar', 
     length: 100, 
-    name: 'password', 
+    name: 'password',
     comment: 'Password of the administrator' 
   })
   password: string;
@@ -48,16 +56,19 @@ export class AdministratorEntity {
 
   @Column({ 
     type: 'date', 
-    name: 'birthday', 
+    name: 'birthdate',
     comment: 'Birthday of the administrator'
    })
-  birthday: Date;
+   birthdate: Date;
 
   @Column({ 
     type: 'boolean', 
     name: 'state', 
     comment: 'State of the administrator' })
   state: boolean;
+
+  @DeleteDateColumn({name:'delete'})
+  delete: Date;
   
 
   @ManyToOne(() => LoginEntity,(login)=>login.administrators)
