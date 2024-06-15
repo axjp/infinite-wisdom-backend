@@ -1,9 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { LoginEntity } from './login.entity';
 import { GenderEntity } from './gender.entity';
 import { CityEntity } from './city.entity';
 import { ReviewEntity } from './review.entity';
 import { LoanEntity } from './loan.entity';
+
 
 @Entity('customers')
 export class CustomerEntity {

@@ -8,6 +8,9 @@ import { LoanController } from './controllers/loan.controller';
 import { BookController } from './controllers/book.controller';
 import { bookProviders } from './providers/book.providers';
 import { BookService } from './services/book.services';
+import { customerProviders } from './providers/customer.providers';
+import { CustomerService } from './services/customer.service';
+import { CustomerController } from './controllers/customer.controller'
 
 @Module({
   imports: [
@@ -17,7 +20,7 @@ import { BookService } from './services/book.services';
       serveRoot: '/public',
     }),
   ],
-  controllers: [LoanController, BookController],
-  providers: [...loanProviders,...bookProviders, LoanService, BookService],
+  controllers: [LoanController, BookController, CustomerController],
+  providers: [...loanProviders,...bookProviders,...customerProviders, LoanService, BookService, CustomerService],
 })
 export class AppModule {}
