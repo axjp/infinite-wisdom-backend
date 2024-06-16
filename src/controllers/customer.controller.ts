@@ -11,13 +11,9 @@ export class CustomerController {
     return await this.customerService.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string) {
-    const customer = await this.customerService.findOne(id);
-    if (!customer) {
-      throw new NotFoundException(`Customer with id ${id} not found`);
-    }
-    return customer;
+  @Get(':idcustomer')
+  async findOneCustomer(@Param('idcustomer') idcustomer: string) {
+    return await this.customerService.findCustomer(idcustomer);
   }
 
   @Post()
@@ -25,17 +21,17 @@ export class CustomerController {
     return await this.customerService.create(customer);
   }
 
-  @Put(':id')
-  async update(@Param('id') id: string, @Body() updatedCustomer: Partial<CustomerEntity>) {
-    const customer = await this.customerService.update(id, updatedCustomer);
+  @Put(':idcustomer')
+  async update(@Param('idcustomer') idcustomer: string, @Body() updatedCustomer: Partial<CustomerEntity>) {
+    const customer = await this.customerService.update(idcustomer, updatedCustomer);
     if (!customer) {
-      throw new NotFoundException(`Customer with id ${id} not found`);
+      throw new NotFoundException(`Customer with id ${idcustomer} not found`);
     }
     return customer;
   }
 
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    await this.customerService.remove(id);
+  @Delete(':idcustomer')
+  async remove(@Param('idcustomer') idcustomer: string) {
+    await this.customerService.remove(idcustomer);
   }
 }

@@ -16,11 +16,8 @@ import { AdministratorServices } from './services/administrator.services';
 import { administratorProviders } from './providers/administrator.providers';
 import { ReviewController } from './controllers/review.controller';
 import { reviewProviders } from './providers/review.providers';
-<<<<<<< Updated upstream
 import { ReviewService } from './services/review.services';
-=======
 import { AuthService } from './services/auth.service';
->>>>>>> Stashed changes
 
 @Module({
   imports: [
@@ -49,13 +46,9 @@ import { AuthService } from './services/auth.service';
     ReviewService,
     LoanService,
     CustomerService,
-<<<<<<< Updated upstream
-    AdministratorServices   
-=======
-    
-    
->>>>>>> Stashed changes
-  ],
+    AdministratorServices,
+    AuthService 
+    ],
 
 })
 export class AppModule {}

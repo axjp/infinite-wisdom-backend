@@ -38,6 +38,12 @@ export class CustomerEntity {
   @Column({ type: 'varchar', length: 10, name: 'cellphone', comment: 'Cellphone number of the customer' })
   cellphone: string;
 
+  @Column({ type: 'varchar', length: 10, name: 'email', comment: 'email of the customer' })
+  email: string;
+
+  @Column({ type: 'varchar', length: 25, name: 'password', comment: 'password of the customer' })
+  password: string;
+
   @Column({ type: 'date', name: 'birthday', comment: 'Birthday of the customer' })
   birthday: Date;
 
