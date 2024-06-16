@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany } from 'typeorm';
 import { CategoryEntity } from './category.entity';
 import { ReviewEntity } from './review.entity';
@@ -40,7 +40,7 @@ export class BookEntity {
   state: boolean;
 
   @ManyToMany(() => CategoryEntity, (category) => category.books)
-  books: BookEntity[];
+  categories: CategoryEntity[];
   
 
   @OneToMany(() => ReviewEntity, (review) => review.book)
