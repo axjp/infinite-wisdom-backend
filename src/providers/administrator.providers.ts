@@ -1,4 +1,3 @@
-/*
 import { DataSource } from 'typeorm';
 import { AdministratorEntity } from '../entities/administrator.entity';
 
@@ -9,4 +8,3 @@ export const administratorProviders = [
     inject: ['DATA_SOURCE'],
   },
 ];
-*/
