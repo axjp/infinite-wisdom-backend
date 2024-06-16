@@ -39,7 +39,7 @@ export class BookEntity {
   state: boolean;
 
   @ManyToMany(() => CategoryEntity, (category) => category.books)
-  books: BookEntity[];
+  categories: CategoryEntity[];
   
 
   @OneToMany(() => ReviewEntity, (review) => review.book)

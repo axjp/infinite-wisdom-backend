@@ -65,9 +65,9 @@ export class BookController {
     return response;
   }
 
-  @Get(':id')
-  async findOneBook(@Param('id') id: string) {
-    const response = await this.bookService.findBook(id);
+  @Get(':idbook')
+  async findOneBook(@Param('idbook') idbook: string) {
+    const response = await this.bookService.findBook(idbook);
     return response;
   }
 }
