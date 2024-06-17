@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseModule } from './database/database.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
@@ -25,8 +26,7 @@ import { ReviewService } from './services/review.services';
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/public',
     }),
-    //AuthModule,
-    //TypeOrmModule.forFeature(),
+    TypeOrmModule.forFeature([LoginEntity]),
   ],
   controllers: [
     BookController,

@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 import { DataSource } from 'typeorm';
 import { LoanEntity } from 'src/entities/loan.entity';
 

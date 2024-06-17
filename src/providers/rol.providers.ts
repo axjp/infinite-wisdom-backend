@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+
 import { DataSource } from 'typeorm';
 import { RolEntity } from 'src/entities/rol.entity';
 export const rolProviders = [
