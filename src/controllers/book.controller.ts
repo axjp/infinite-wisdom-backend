@@ -7,6 +7,8 @@ import * as path from 'path';
 @Controller('books')
 export class BookController {
   constructor(private readonly bookService: BookService) {}
+
+  @Post()
   @UseInterceptors(
     FileFieldsInterceptor([
       { name: 'pdf', maxCount: 1 },
@@ -19,7 +21,7 @@ export class BookController {
           } else if (file.fieldname === 'image') {
             cb(null, './public/images');
           } else {
-            cb(new BadRequestException('Tipo de archivo no soportado'), ''); 
+            cb(new BadRequestException('Tipo de archivo no soportado'), '');
           }
         },
         filename: (req, file, cb) => {
@@ -42,11 +44,32 @@ export class BookController {
       },
     }),
   )
-  @Post()
-  uploadFiles(@UploadedFiles() files: { pdf?: Express.Multer.File[], image?: Express.Multer.File[] }) {
-    return this.bookService.handleUploadedFiles(files);
-  }
+  async uploadFiles(@UploadedFiles() files: { pdf?: Express.Multer.File[], image?: Express.Multer.File[] }, @Body() payload: any) {
+    const fileUrls = {};
 
+    if (files.pdf && files.pdf[0]) {
+      fileUrls['pdf'] = `http://localhost:3000/public/pdfs/${files.pdf[0].filename}`;
+      payload.pdfUrl = fileUrls['pdf'];
+      payload.pdfName = files.pdf[0].filename; // Guardar el nombre del PDF
+    }
+
+    if (files.image && files.image[0]) {
+      fileUrls['image'] = `http://localhost:3000/public/images/${files.image[0].filename}`;
+      payload.imageUrl = fileUrls['image'];
+      payload.imageName = files.image[0].filename; // Guardar el nombre de la imagen
+    }
+
+    const response = await this.bookService.create(payload);
+    return { message: 'Archivos cargados correctamente', response };
+}
+
+/*
+  @Post()
+  async registerUser(@Body() payload: any) {
+    const response = await this.bookService.create(payload);
+    return response;
+  }
+*/
   @Put(':idbook')
   update(@Param('idbook') idbook: string, @Body() payload: any) {
     //todo
@@ -65,9 +88,9 @@ export class BookController {
     return response;
   }
 
-  @Get(':idbook')
-  async findOneBook(@Param('idbook') idbook: string) {
-    const response = await this.bookService.findBook(idbook);
+  @Get(':id')
+  async findOneBook(@Param('id') id: string) {
+    const response = await this.bookService.findBook(id);
     return response;
   }
 }

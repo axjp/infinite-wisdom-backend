@@ -9,23 +9,23 @@ export class BookService {
         private readonly bookRepository: Repository<BookEntity>,
     ) { }
 
-    handleUploadedFiles(files: { pdf?: Express.Multer.File[], image?: Express.Multer.File[] }) {
-        const fileUrls = {};
+  create(payload: any) {
+        const newBook = this.bookRepository.create();
+        newBook.title = payload.title;
+        newBook.nameauthor = payload.nameauthor;
+        newBook.lastnameauthor = payload.lastnameauthor;
+        newBook.publicationDate = payload.publicationDate;
+        newBook.edition = payload.edition;
+        newBook.editorial = payload.editorial;
+        newBook.description = payload.description;
+        newBook.pdfUrl = payload.pdfUrl;
+        newBook.imageUrl = payload.imageUrl;
+        newBook.pdfName = payload.pdfName;
+        newBook.imageName = payload.imageName;
+        newBook.state = payload.state;
+    
 
-        if (files.pdf && files.pdf[0]) {
-            const pdfFile = files.pdf[0];
-            fileUrls['pdf'] = `http://localhost:3000/public/pdfs/${pdfFile.filename}`;
-        }
-
-        if (files.image && files.image[0]) {
-            const imageFile = files.image[0];
-            fileUrls['image'] = `http://localhost:3000/public/images/${imageFile.filename}`;
-        }
-
-        return {
-            msg: 'Archivos cargados correctamente',
-            files: fileUrls,
-        };
+        return this.bookRepository.save(newBook);
     }
 
 
@@ -42,17 +42,7 @@ export class BookService {
         return book;
     }
 
-    create(payload: any) {
-        const newBook = this.bookRepository.create();
-        newBook.title = payload.title;
-        newBook.nameauthor = payload.nameauthor;
-        newBook.lastnameauthor = payload.lastnameauthor;
-        newBook.editorial = payload.editorial;
-        newBook.description = payload.description;
-        newBook.pdfname = payload.pdfname;
-
-        return this.bookRepository.save(newBook);
-    }
+    
 
     async update(idbook: string, payload: any) {
         const book = await this.bookRepository.findOne({
