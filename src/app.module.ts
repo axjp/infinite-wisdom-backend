@@ -17,7 +17,7 @@ import { administratorProviders } from './providers/administrator.providers';
 import { ReviewController } from './controllers/review.controller';
 import { reviewProviders } from './providers/review.providers';
 import { ReviewService } from './services/review.services';
-import { AuthService } from './services/auth.service';
+//import { AuthService } from './services/auth.service';
 
 @Module({
   imports: [
@@ -47,7 +47,7 @@ import { AuthService } from './services/auth.service';
     LoanService,
     CustomerService,
     AdministratorServices,
-    AuthService 
+   // AuthService 
     ],
 
 })

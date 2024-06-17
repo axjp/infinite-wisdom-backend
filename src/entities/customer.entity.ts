@@ -41,12 +41,15 @@ export class CustomerEntity {
   @Column({ type: 'varchar', length: 10, name: 'email', comment: 'email of the customer' })
   email: string;
 
+  @Column({ type: 'varchar', length: 10, name: 'customerUser', comment: 'user name of the customer' })
+  customerUser: string;
+
   @Column({ type: 'varchar', length: 25, name: 'password', comment: 'password of the customer' })
   password: string;
 
   @Column({ type: 'date', name: 'birthday', comment: 'Birthday of the customer' })
   birthday: Date;
 
-  @Column({ type: 'boolean', name: 'state', comment: 'State of the customer' })
-  state: boolean;
+  @Column({ type: 'boolean', name: 'accept', comment: 'State of the customer' })
+  accept: boolean;
 }

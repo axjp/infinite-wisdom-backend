@@ -28,10 +28,11 @@ export class CustomerService {
     newCustomer.name = customer.name;
     newCustomer.lastName = customer.lastName;
     newCustomer.email = customer.email; 
+    newCustomer.customerUser = customer.customerUser; 
     newCustomer.password = customer.password;
     newCustomer.cellphone = customer.cellphone;
     newCustomer.birthday = customer.birthday;
-    newCustomer.state = customer.state;
+    newCustomer.accept = customer.accept;
 
     return await this.customerRepository.save(newCustomer);
   }
@@ -41,10 +42,11 @@ export class CustomerService {
     Customer.name = updatedcustomer.name;
     Customer.lastName = updatedcustomer.lastName;
     Customer.email = updatedcustomer.email; 
+    Customer.customerUser = updatedcustomer.customerUser; 
     Customer.password = updatedcustomer.password;
     Customer.cellphone = updatedcustomer.cellphone;
     Customer.birthday = updatedcustomer.birthday;
-    Customer.state = updatedcustomer.state;
+    Customer.accept = updatedcustomer.accept;
 
     return await this.customerRepository.save(updatedcustomer);
 
