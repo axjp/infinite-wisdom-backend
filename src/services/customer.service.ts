@@ -25,6 +25,14 @@ export class CustomerService {
 
   async create(customer: CustomerEntity): Promise<CustomerEntity> {
     const newCustomer = this.customerRepository.create(customer);
+    newCustomer.name = customer.name;
+    newCustomer.lastName = customer.lastName;
+    newCustomer.email = customer.email;
+    newCustomer.customerUser = customer.customerUser; 
+    newCustomer.password = customer.password;
+    newCustomer.cellphone = customer.cellphone;
+    newCustomer.birthday = customer.birthday;
+    newCustomer.accept = customer.accept;
     return await this.customerRepository.save(newCustomer);
   }
 
@@ -36,7 +44,7 @@ export class CustomerService {
     customer.password = updatedcustomer.password;
     customer.cellphone = updatedcustomer.cellphone;
     customer.birthday = updatedcustomer.birthday;
-    customer.state = updatedcustomer.state;
+    customer.accept = updatedcustomer.accept;
 
     return await this.customerRepository.save(customer);
   }
