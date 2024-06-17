@@ -1,33 +1,20 @@
-/*
 import { Module } from '@nestjs/common';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { administratorProviders } from '../providers/administrator.providers';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { LoginService } from './login.service';
+//import { LoginController } from './login.controller';
+import { LoginEntity } from '../entities/login.entity';
 import { JwtModule } from '@nestjs/jwt';
-import { DatabaseModule } from '../database/database.module';
-import { APP_GUARD } from '@nestjs/core';
-import { AuthGuard } from './auth.guard';
-import { AdministratorService } from 'src/services/administrator.services';
+import { LoginController } from 'src/controllers/login.controller';
 
 @Module({
   imports: [
-    DatabaseModule,
+    TypeOrmModule.forFeature([LoginEntity]),
     JwtModule.register({
-      global: true,
-      secret: '1234abcd',
-      signOptions: { expiresIn: '15m' },
+      secret: 'yourSecretKey',
+      signOptions: { expiresIn: '1h' },
     }),
   ],
-  controllers: [AuthController],
-  providers: [
-    AuthService,
-    AdministratorService,
-    ...administratorProviders,
-    {
-      provide: APP_GUARD,
-      useClass: AuthGuard,
-    },
-  ],
+  providers: [LoginService],
+  controllers: [LoginController],
 })
 export class AuthModule {}
-*/

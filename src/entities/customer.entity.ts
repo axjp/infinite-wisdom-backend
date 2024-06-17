@@ -1,26 +1,25 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, JoinColumn } from 'typeorm';
 import { LoginEntity } from './login.entity';
 import { GenderEntity } from './gender.entity';
 import { CityEntity } from './city.entity';
 import { ReviewEntity } from './review.entity';
 import { LoanEntity } from './loan.entity';
 
-
 @Entity('customers')
 export class CustomerEntity {
   @PrimaryGeneratedColumn('uuid', { name: 'id_customer' })
   idcustomer: string;
 
-  @ManyToOne(() => LoginEntity)
-  @JoinColumn({name:'login_id'})
+  @OneToOne(() => LoginEntity)
+  @JoinColumn({ name: 'login_id' })
   login: LoginEntity;
 
-  @ManyToOne(() => GenderEntity)
-  @JoinColumn({name:'gender_id'})
+  @OneToOne(() => GenderEntity)
+  @JoinColumn({ name: 'gender_id' })
   gender: GenderEntity;
 
-  @ManyToOne(() => CityEntity)
-  @JoinColumn({name:'city_id'})
+  @OneToOne(() => CityEntity)
+  @JoinColumn({ name: 'city_id' })
   city: CityEntity;
 
   @OneToMany(() => ReviewEntity, (review) => review.customer)

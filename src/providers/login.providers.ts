@@ -1,6 +1,5 @@
-/* eslint-disable prettier/prettier */
 import { DataSource } from 'typeorm';
-import { LoginEntity } from 'src/entities/login.entity';
+import { LoginEntity } from '../entities/login.entity';
 
 export const loginProviders = [
   {
