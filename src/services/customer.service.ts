@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Inject } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CustomerEntity } from '../entities/customer.entity';
 
 @Injectable()
 export class CustomerService {
   constructor(
-    @Inject('CUSTOMER_REPOSITORY')
+    @InjectRepository(CustomerEntity)
     private readonly customerRepository: Repository<CustomerEntity>,
   ) {}
 
@@ -24,35 +24,24 @@ export class CustomerService {
   }
 
   async create(customer: CustomerEntity): Promise<CustomerEntity> {
-    const newCustomer = new CustomerEntity();
-    newCustomer.name = customer.name;
-    newCustomer.lastName = customer.lastName;
-    newCustomer.email = customer.email; 
-    newCustomer.customerUser = customer.customerUser; 
-    newCustomer.password = customer.password;
-    newCustomer.cellphone = customer.cellphone;
-    newCustomer.birthday = customer.birthday;
-    newCustomer.accept = customer.accept;
-
+    const newCustomer = this.customerRepository.create(customer);
     return await this.customerRepository.save(newCustomer);
   }
 
   async update(idcustomer: string, updatedcustomer: Partial<CustomerEntity>): Promise<CustomerEntity> {
-    let Customer = await this.findCustomer(idcustomer);
-    Customer.name = updatedcustomer.name;
-    Customer.lastName = updatedcustomer.lastName;
-    Customer.email = updatedcustomer.email; 
-    Customer.customerUser = updatedcustomer.customerUser; 
-    Customer.password = updatedcustomer.password;
-    Customer.cellphone = updatedcustomer.cellphone;
-    Customer.birthday = updatedcustomer.birthday;
-    Customer.accept = updatedcustomer.accept;
+    const customer = await this.findCustomer(idcustomer);
+    customer.name = updatedcustomer.name;
+    customer.lastName = updatedcustomer.lastName;
+    customer.email = updatedcustomer.email; 
+    customer.password = updatedcustomer.password;
+    customer.cellphone = updatedcustomer.cellphone;
+    customer.birthday = updatedcustomer.birthday;
+    customer.state = updatedcustomer.state;
 
-    return await this.customerRepository.save(updatedcustomer);
-
+    return await this.customerRepository.save(customer);
   }
 
-  async remove(idcustomer: string){
+  async remove(idcustomer: string) {
     if (!idcustomer) {
       throw new NotFoundException('ID is required for deletion');
     }
@@ -60,9 +49,9 @@ export class CustomerService {
     const deleteResult = await this.customerRepository.softDelete({ idcustomer });
 
     if (deleteResult.affected === 0) {
-      throw new NotFoundException(`Administrator with ID ${idcustomer} not found`);
+      throw new NotFoundException(`Customer with ID ${idcustomer} not found`);
     }
 
-    return  deleteResult;
+    return deleteResult;
   }
 }
