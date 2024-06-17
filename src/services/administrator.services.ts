@@ -39,7 +39,7 @@ export class AdministratorServices {
   }
 
   async update(idAdministrator: string, payload: any) {
-    let administrator = await this.findAdministrator(idAdministrator);
+    const administrator = await this.findAdministrator(idAdministrator);
 
     administrator.name = payload.name;
     administrator.lastName = payload.lastName;
