@@ -1,17 +1,26 @@
+<<<<<<< HEAD
 /*import { Controller, Post, Body, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
+=======
+import { Controller, Post, Body, HttpCode, HttpStatus, Get } from '@nestjs/common';
+import { AuthService } from './auth.service'; // Asegúrate de importar y usar tu AuthService aquí
+import { Public } from './auth.guard';
+
+>>>>>>> 6c1cad083621f22610a13f543e8638ad918a9f77
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
-  @Post('login')
-  async login(@Body() loginDto: any) {
-    const { email, password } = loginDto;
-    if (!email || !password) {
-      throw new UnauthorizedException('Email and password are required');
-    }
-    return this.authService.login(email, password);
+@Public()
+@HttpCode(HttpStatus.OK)
+@Post('login')
+login(@Body() signInDto: Record<string, any>) {
+  return this.authService.validateCustomer(signInDto.username, signInDto.password);
+  }
+  @Get('')
+  getProfile() {
+    return 'Tiene acceso a una ruta restringida';
   }
 }
 */

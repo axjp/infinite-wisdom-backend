@@ -1,21 +1,40 @@
+<<<<<<< HEAD
 /*import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LoginService } from './login.service';
 //import { LoginController } from './login.controller';
 import { LoginEntity } from '../entities/login.entity';
+=======
+import { Module } from '@nestjs/common';
+>>>>>>> 6c1cad083621f22610a13f543e8638ad918a9f77
 import { JwtModule } from '@nestjs/jwt';
-import { LoginController } from 'src/controllers/login.controller';
+import { AuthGuard } from '@nestjs/passport';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
+import { DatabaseModule } from 'src/database/database.module';
+import { CustomerService } from 'src/services/customer.service';
+import { customerProviders } from 'src/providers/customer.providers';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([LoginEntity]),
+    DatabaseModule,
     JwtModule.register({
-      secret: 'yourSecretKey',
-      signOptions: { expiresIn: '1h' },
+      global: true,
+      secret: '1234', 
+      signOptions: { expiresIn: '10s' }, 
     }),
   ],
-  providers: [LoginService],
-  controllers: [LoginController],
+  providers: [
+    AuthService, 
+    CustomerService,
+    ...customerProviders,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
+  controllers: [AuthController],
 })
 export class AuthModule {}
 */
