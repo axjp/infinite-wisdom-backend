@@ -1,20 +1,31 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
+import { AuthGuard } from '@nestjs/passport';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { JwtAuthGuard } from './auth.guard'; // Importa el guardia de autenticación JWT
+import { DatabaseModule } from 'src/database/database.module';
+import { CustomerService } from 'src/services/customer.service';
+import { customerProviders } from 'src/providers/customer.providers';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
-    PassportModule.register({ defaultStrategy: 'jwt' }),
+    DatabaseModule,
     JwtModule.register({
-      secret: 'your_secret_key', // Cambiar por una clave secreta más segura en producción
-      signOptions: { expiresIn: '1h' }, // Cambiar el tiempo de expiración según necesidades
+      global: true,
+      secret: '1234', 
+      signOptions: { expiresIn: '10s' }, 
     }),
   ],
-  providers: [AuthService, JwtAuthGuard],
+  providers: [
+    AuthService, 
+    CustomerService,
+    ...customerProviders,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
   controllers: [AuthController],
-  exports: [AuthService], // Exporta el servicio de autenticación para otros módulos
 })
 export class AuthModule {}

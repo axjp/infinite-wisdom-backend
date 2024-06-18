@@ -1,28 +1,30 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { CustomerService } from '../services/customer.service'; // Asegúrate de importar y usar tu servicio de Customer aquí
-import { CustomerEntity } from '../entities/customer.entity'; // Asegúrate de importar y usar tu entidad de Customer aquí
+import { CustomerService } from '../services/customer.service'; 
+
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly customerService: CustomerService,
-    private readonly jwtService: JwtService,
+    private jwtService: JwtService,
   ) {}
 
-  async validateCustomer(customerUser: string, password: string): Promise<CustomerEntity | null> {
+  async validateCustomer(customerUser: string, pass: string): Promise<any> {
     const customer = await this.customerService.findCustomer(customerUser);
 
-    if (customer && customer.password === password) {
-      return customer;
+    if (customer?.password !== pass) {
+      throw new UnauthorizedException();
     }
-    return null;
-  }
 
-  async login(customer: CustomerEntity) {
-    const payload = { username: customer.customerUser, sub: customer.idcustomer };
+    const payload = { sub: customer.idcustomer, username: customer.email };
+
+    const { password, ...userRest } = customer;
+
     return {
-      access_token: this.jwtService.sign(payload),
+      user: userRest,
+      token: await this.jwtService.signAsync(payload),
     };
   }
 }
+
