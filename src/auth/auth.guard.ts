@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 /*import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
-=======
-import { Injectable, CanActivate, ExecutionContext, UnauthorizedException, SetMetadata } from '@nestjs/common';
->>>>>>> 6c1cad083621f22610a13f543e8638ad918a9f77
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 

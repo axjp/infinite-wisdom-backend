@@ -17,31 +17,20 @@ import { administratorProviders } from './providers/administrator.providers';
 import { ReviewController } from './controllers/review.controller';
 import { reviewProviders } from './providers/review.providers';
 import { ReviewService } from './services/review.services';
-<<<<<<< HEAD
 //import { LoginService } from './auth/login.service';
 //import { LoginController } from './auth/login.controller';
 import { LoginEntity } from './entities/login.entity';
 //import { LoginController } from './controllers/login.controller';
-=======
-import { AuthController } from './auth/auth.controller';
-
-import { AuthService } from './auth/auth.service';
-import { AuthModule } from './auth/auth.module';
->>>>>>> 6c1cad083621f22610a13f543e8638ad918a9f77
 
 @Module({
   imports: [
     DatabaseModule,
-    AuthModule,
+   // AuthModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/public',
     }),
-<<<<<<< HEAD
     //TypeOrmModule.forFeature([LoginEntity]),
-=======
-    
->>>>>>> 6c1cad083621f22610a13f543e8638ad918a9f77
   ],
   controllers: [
     BookController,
@@ -49,11 +38,7 @@ import { AuthModule } from './auth/auth.module';
     LoanController,
     //CustomerController,
     AdministratorController,
-<<<<<<< HEAD
     //LoginController,
-=======
-    AuthController,
->>>>>>> 6c1cad083621f22610a13f543e8638ad918a9f77
   ],
   providers: [
     ...bookProviders,
@@ -66,12 +51,7 @@ import { AuthModule } from './auth/auth.module';
     LoanService,
    // CustomerService,
     AdministratorServices,
-<<<<<<< HEAD
    // LoginService,
-=======
-    AuthService
- 
->>>>>>> 6c1cad083621f22610a13f543e8638ad918a9f77
   ],
 })
 export class AppModule {}

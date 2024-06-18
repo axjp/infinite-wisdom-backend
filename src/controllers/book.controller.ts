@@ -50,36 +50,98 @@ export class BookController {
     if (files.pdf && files.pdf[0]) {
       fileUrls['pdf'] = `http://localhost:3000/public/pdfs/${files.pdf[0].filename}`;
       payload.pdfUrl = fileUrls['pdf'];
-      payload.pdfName = files.pdf[0].filename; // Guardar el nombre del PDF
+      payload.pdfName = files.pdf[0].filename; 
     }
 
     if (files.image && files.image[0]) {
       fileUrls['image'] = `http://localhost:3000/public/images/${files.image[0].filename}`;
       payload.imageUrl = fileUrls['image'];
-      payload.imageName = files.image[0].filename; // Guardar el nombre de la imagen
+      payload.imageName = files.image[0].filename; 
     }
 
     const response = await this.bookService.create(payload);
     return { message: 'Archivos cargados correctamente', response };
 }
 
+@Put(':idbook')
+@UseInterceptors(
+  FileFieldsInterceptor([
+    { name: 'pdf', maxCount: 1 },
+    { name: 'image', maxCount: 1 }
+  ], {
+    storage: diskStorage({
+      destination: (req, file, cb) => {
+        if (file.fieldname === 'pdf') {
+          cb(null, './public/pdfs');
+        } else if (file.fieldname === 'image') {
+          cb(null, './public/images');
+        } else {
+          cb(new BadRequestException('Tipo de archivo no soportado'), '');
+        }
+      },
+      filename: (req, file, cb) => {
+        const ext = path.extname(file.originalname);
+        const fileName = `${Date.now()}${ext}`;
+        cb(null, fileName);
+      },
+    }),
+    fileFilter: (req, file, cb) => {
+      if (file.fieldname === 'pdf') {
+        if (!file.originalname.match(/\.(pdf)$/)) {
+          return cb(new BadRequestException('¡Solo se permiten archivos PDF!'), false);
+        }
+      } else if (file.fieldname === 'image') {
+        if (!file.originalname.match(/\.(png|jpg|jpeg)$/)) {
+          return cb(new BadRequestException('¡Solo se permiten archivos PNG, JPG y JPEG!'), false);
+        }
+      }
+      cb(null, true);
+    },
+  }),
+)
+async updateBook(
+  @Param('idbook') idbook: string,
+  @UploadedFiles() files: { pdf?: Express.Multer.File[], image?: Express.Multer.File[] },
+  @Body() payload: any
+) {
+  const fileUrls = {};
+
+  if (files.pdf && files.pdf[0]) {
+    fileUrls['pdf'] = `http://localhost:3000/public/pdfs/${files.pdf[0].filename}`;
+    payload.pdfUrl = fileUrls['pdf'];
+    payload.pdfName = files.pdf[0].filename; // Guardar el nombre del PDF
+  }
+
+  if (files.image && files.image[0]) {
+    fileUrls['image'] = `http://localhost:3000/public/images/${files.image[0].filename}`;
+    payload.imageUrl = fileUrls['image'];
+    payload.imageName = files.image[0].filename; // Guardar el nombre de la imagen
+  }
+
+  const response = await this.bookService.update(idbook, payload);
+  return { message: 'Libro actualizado correctamente', response };
+}
 /*
   @Post()
   async registerUser(@Body() payload: any) {
     const response = await this.bookService.create(payload);
     return response;
   }
-*/
+
 
   @Put(':idbook')
   update(@Param('idbook') idbook: string, @Body() payload: any) {
     //todo
     return '';
-  }
+  }*/
+   /* @Delete(':idbook')
+    async delete(@Param('idbook') idAdministrator: string) {
+      return await this.bookService.softDelete(idAdministrator);
+    }*/
 
   @Delete(':idbook')
-  delete(@Param('idbook') idbook: string) {
-    return this.bookService.delete(idbook);
+  async delete(@Param('idbook') idbook: string) {
+    return await this.bookService.softDelete(idbook);
   }
 
   @Get()
@@ -94,8 +156,5 @@ export class BookController {
     const response = await this.bookService.findBook(id);
     return response;
   }
-  @Get('category/:category')
-  getBooksByCategory(@Param('category') category: string) {
-    return this.bookService.findBooksByCategory(category);
-  }
+ 
 }

@@ -1,12 +1,8 @@
-<<<<<<< HEAD
 /*import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LoginService } from './login.service';
 //import { LoginController } from './login.controller';
 import { LoginEntity } from '../entities/login.entity';
-=======
-import { Module } from '@nestjs/common';
->>>>>>> 6c1cad083621f22610a13f543e8638ad918a9f77
 import { JwtModule } from '@nestjs/jwt';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthController } from './auth.controller';

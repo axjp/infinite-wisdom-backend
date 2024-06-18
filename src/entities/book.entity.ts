@@ -1,5 +1,5 @@
 
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany, DeleteDateColumn } from 'typeorm';
 import { CategoryEntity } from './category.entity';
 import { ReviewEntity } from './review.entity';
 import { LoanEntity } from './loan.entity';
@@ -30,27 +30,31 @@ export class BookEntity {
   @Column({ type: 'varchar', length: 100, name: 'description', comment: 'Description of the book', nullable: true })
   description: string;
 
-  @Column({ type: 'varchar', length: 200, name: 'pdf_url', comment: 'PDF url of the book' , nullable: true})
+  @Column({ type: 'varchar', length: 200, name: 'pdf_url', comment: 'PDF url of the book', nullable: true })
   pdfUrl: string;
 
-  @Column({ type: 'varchar', length: 200, name: 'image_url', comment: 'Image of the book' , nullable: true})
+  @Column({ type: 'varchar', length: 200, name: 'image_url', comment: 'Image of the book', nullable: true })
   imageUrl: string;
 
   @Column({ type: 'varchar', length: 200, name: 'pdf_name', comment: 'PDF name of the book', nullable: true })
   pdfName: string;
 
-  @Column({ type: 'varchar', length: 200, name: 'image_name', comment: 'Image of the book' , nullable: true})
+  @Column({ type: 'varchar', length: 200, name: 'image_name', comment: 'Image of the book', nullable: true })
   imageName: string;
 
-  @Column({ type: 'varchar', length: 200, name: 'categories', comment: 'Image of the book' , nullable: true})
+  @Column({ type: 'varchar', length: 200, name: 'categories', comment: 'Image of the book', nullable: true })
   categories: string;
 
   @Column({ type: 'boolean', name: 'state', comment: 'State of the book', nullable: true })
   state: boolean;
+  @DeleteDateColumn({name:'deleteBook'})
+  deleteBook?: Date;
+  
 
-  /*@ManyToMany(() => CategoryEntity, (category) => category.books)
-  categories: CategoryEntity[];
-*/
+
+  /* @ManyToMany(() => CategoryEntity, (category) => category.books)
+   categories: CategoryEntity[];*/
+
   @OneToMany(() => ReviewEntity, (review) => review.book)
   reviews: ReviewEntity[];
 
