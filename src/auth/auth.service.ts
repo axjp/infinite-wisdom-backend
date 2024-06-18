@@ -26,8 +26,4 @@ export class AuthService {
       token: await this.jwtService.signAsync(payload),
     };
   }
-<<<<<<< HEAD
 }*/
-=======
-}*/
->>>>>>> 7f702439598e0e5b185b9a6b4e9c184391803574

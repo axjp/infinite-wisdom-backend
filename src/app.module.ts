@@ -25,11 +25,7 @@ import { ReviewService } from './services/review.services';
 @Module({
   imports: [
     DatabaseModule,
-<<<<<<< HEAD
    // AuthModule,
-=======
-    //AuthModule,
->>>>>>> 7f702439598e0e5b185b9a6b4e9c184391803574
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/public',
