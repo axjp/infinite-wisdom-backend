@@ -18,10 +18,10 @@ import { administratorProviders } from './providers/administrator.providers';
 import { ReviewController } from './controllers/review.controller';
 import { reviewProviders } from './providers/review.providers';
 import { ReviewService } from './services/review.services';
-import { LoginService } from './auth/login.service';
+//import { LoginService } from './auth/login.service';
 //import { LoginController } from './auth/login.controller';
 import { LoginEntity } from './entities/login.entity';
-import { LoginController } from './controllers/login.controller';
+//import { LoginController } from './controllers/login.controller';
 
 @Module({
   imports: [
@@ -30,28 +30,28 @@ import { LoginController } from './controllers/login.controller';
       rootPath: join(__dirname, '..', 'public'),
       serveRoot: '/public',
     }),
-    TypeOrmModule.forFeature([LoginEntity]),
+    //TypeOrmModule.forFeature([LoginEntity]),
   ],
   controllers: [
     BookController,
     ReviewController,
     LoanController,
-    CustomerController,
+    //CustomerController,
     AdministratorController,
-    LoginController,
+    //LoginController,
   ],
   providers: [
     ...bookProviders,
     ...reviewProviders,
     ...administratorProviders,
     ...loanProviders,
-    ...customerProviders,
+    //...customerProviders,
     BookService,
     ReviewService,
     LoanService,
-    CustomerService,
+   // CustomerService,
     AdministratorServices,
-    LoginService,
+   // LoginService,
   ],
 })
 export class AppModule {}

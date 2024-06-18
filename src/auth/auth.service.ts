@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+/*import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 //import { LoginEntity } from '../database/entities/login.entity';
 import { Repository } from 'typeorm';
@@ -23,4 +23,4 @@ export class AuthService {
       access_token: this.jwtService.sign(payload),
     };
   }
-}
+}*/

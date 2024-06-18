@@ -42,13 +42,15 @@ export class BookEntity {
   @Column({ type: 'varchar', length: 200, name: 'image_name', comment: 'Image of the book' , nullable: true})
   imageName: string;
 
+  @Column({ type: 'varchar', length: 200, name: 'categories', comment: 'Image of the book' , nullable: true})
+  categories: string;
+
   @Column({ type: 'boolean', name: 'state', comment: 'State of the book', nullable: true })
   state: boolean;
 
-  @ManyToMany(() => CategoryEntity, (category) => category.books)
+  /*@ManyToMany(() => CategoryEntity, (category) => category.books)
   categories: CategoryEntity[];
-  
-
+*/
   @OneToMany(() => ReviewEntity, (review) => review.book)
   reviews: ReviewEntity[];
 

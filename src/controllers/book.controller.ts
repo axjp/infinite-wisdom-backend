@@ -70,6 +70,7 @@ export class BookController {
     return response;
   }
 */
+
   @Put(':idbook')
   update(@Param('idbook') idbook: string, @Body() payload: any) {
     //todo
@@ -92,5 +93,9 @@ export class BookController {
   async findOneBook(@Param('id') id: string) {
     const response = await this.bookService.findBook(id);
     return response;
+  }
+  @Get('category/:category')
+  getBooksByCategory(@Param('category') category: string) {
+    return this.bookService.findBooksByCategory(category);
   }
 }

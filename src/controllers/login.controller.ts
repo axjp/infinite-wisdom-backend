@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+/*import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { LoginEntity } from '../entities/login.entity';
 import { LoginService } from 'src/auth/login.service';
 
@@ -31,3 +31,4 @@ export class LoginController {
     return await this.loginService.remove(id);
   }
 }
+*/

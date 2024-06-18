@@ -13,7 +13,7 @@ export const databaseProviders = [
         database: 'demo2',
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         synchronize: true,
-        dropSchema: true,
+        dropSchema: false,
       });
 
       return dataSource.initialize();

@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, JoinColumn
 import { RolEntity } from './rol.entity';
 import { AdministratorEntity } from './administrator.entity';
 import { CustomerEntity } from './customer.entity';
-import * as bcrypt from 'bcrypt';
+//import * as bcrypt from 'bcrypt';
 
 @Entity('logins')
 export class LoginEntity {
@@ -28,7 +28,7 @@ export class LoginEntity {
   @OneToMany(() => CustomerEntity, (customer) => customer.login)
   customers: CustomerEntity[];
 
-  static async createTestCredentials(): Promise<LoginEntity> {
+/*  static async createTestCredentials(): Promise<LoginEntity> {
     const email = 'kevin@example.com'; // Usuario de prueba
     const password = '1234'; // Contraseña de prueba
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -36,5 +36,5 @@ export class LoginEntity {
     login.email = email;
     login.password = hashedPassword;
     return login;
-  }
+  }*/
 }

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+/*import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LoginService } from './login.service';
 //import { LoginController } from './login.controller';
@@ -18,3 +18,4 @@ import { LoginController } from 'src/controllers/login.controller';
   controllers: [LoginController],
 })
 export class AuthModule {}
+*/

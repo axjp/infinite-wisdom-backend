@@ -21,12 +21,19 @@ export class BookService {
         newBook.pdfUrl = payload.pdfUrl;
         newBook.imageUrl = payload.imageUrl;
         newBook.pdfName = payload.pdfName;
+        newBook.categories = payload.categories;
         newBook.imageName = payload.imageName;
         newBook.state = payload.state;
     
 
         return this.bookRepository.save(newBook);
     }
+
+
+
+    async findBooksByCategory(category: string) {
+        return await this.bookRepository.findOne({ where: { categories: category } });
+      }
 
 
     async findAll() {
