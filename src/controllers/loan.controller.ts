@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, Patch } from '@nestjs/common';
 import { LoanService } from '../services/loan.services';
 import { LoanEntity } from '../entities/loan.entity';
 
@@ -24,6 +24,11 @@ export class LoanController {
   @Put(':id')
   async update(@Param('id') id: string, @Body() updatedLoan: Partial<LoanEntity>) {
     return await this.loanService.update(id, updatedLoan);
+  }
+
+  @Patch(':id')
+  async patch(@Param('id') id: string, @Body() partialLoan: Partial<LoanEntity>) {
+    return await this.loanService.patch(id, partialLoan);
   }
 
   @Delete(':id')
